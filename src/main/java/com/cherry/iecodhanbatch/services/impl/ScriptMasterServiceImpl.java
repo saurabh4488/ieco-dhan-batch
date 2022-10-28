@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+
 @Service
 public class ScriptMasterServiceImpl implements ScriptMasterService {
 
@@ -33,16 +34,19 @@ public class ScriptMasterServiceImpl implements ScriptMasterService {
 
             for (Row row: sheet) {
                 ScriptMasterDb scriptMasterDb=new ScriptMasterDb();
-                scriptMasterDb.setSem_exm_exch_id(dataFormatter.formatCellValue(row.getCell(0)));
-                scriptMasterDb.setSem_segment(dataFormatter.formatCellValue(row.getCell(1)));
-                scriptMasterDb.setSem_smst_security_id(dataFormatter.formatCellValue(row.getCell(2)));
-                scriptMasterDb.setSem_instrument_name(dataFormatter.formatCellValue(row.getCell(3)));
-                scriptMasterDb.setSem_expiry_code(dataFormatter.formatCellValue(row.getCell(4)));
-                scriptMasterDb.setSem_trading_symbol(dataFormatter.formatCellValue(row.getCell(5)));
-                scriptMasterDb.setSem_lot_units(dataFormatter.formatCellValue(row.getCell(6)));
-                scriptMasterDb.setSem_custom_symbol(dataFormatter.formatCellValue(row.getCell(7)));
 
-                scriptMasterRepository.save(scriptMasterDb);
+                String equityCheck=dataFormatter.formatCellValue(row.getCell(3));
+                if(equityCheck.equals("EQUITY")){
+                    scriptMasterDb.setSem_exm_exch_id(dataFormatter.formatCellValue(row.getCell(0)));
+                    scriptMasterDb.setSem_segment(dataFormatter.formatCellValue(row.getCell(1)));
+                    scriptMasterDb.setSem_smst_security_id(dataFormatter.formatCellValue(row.getCell(2)));
+                    scriptMasterDb.setSem_instrument_name(dataFormatter.formatCellValue(row.getCell(3)));
+                    scriptMasterDb.setSem_expiry_code(dataFormatter.formatCellValue(row.getCell(4)));
+                    scriptMasterDb.setSem_trading_symbol(dataFormatter.formatCellValue(row.getCell(5)));
+                    scriptMasterDb.setSem_lot_units(dataFormatter.formatCellValue(row.getCell(6)));
+                    scriptMasterDb.setSem_custom_symbol(dataFormatter.formatCellValue(row.getCell(7)));
+                    scriptMasterRepository.save(scriptMasterDb);
+                }
 
             }
 
