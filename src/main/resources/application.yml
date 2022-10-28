@@ -9,9 +9,9 @@ spring:
     hikari:
       connection-timeout: '30000'
       maximum-pool-size: '50'
-    password: saurabh4488
+    password: sheraliz
     username: system
-    url: jdbc:oracle:thin:@localhost:1521:orcl
+    url: jdbc:oracle:thin:@localhost:1521:xe
   jpa:
     show-sql: 'true'
     hibernate:
