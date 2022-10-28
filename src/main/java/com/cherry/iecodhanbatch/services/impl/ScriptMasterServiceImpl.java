@@ -52,6 +52,13 @@ public class ScriptMasterServiceImpl implements ScriptMasterService {
 
     @Override
     public String getSecurityId(SecurityIdRequest securityIdRequest) {
-        return null;
+        log.info("hitting setting security");
+        String exchangeSymbol=securityIdRequest.getSemExmExchangeId();
+        log.info(exchangeSymbol);
+        String tradingSymbol=securityIdRequest.getSemTradingSymbol();
+        log.info(tradingSymbol);
+        ScriptMasterDb securityId=scriptMasterRepository.findSecurityId(exchangeSymbol,tradingSymbol);
+        log.info(securityId.getSem_smst_security_id());
+        return securityId.getSem_smst_security_id();
     }
 }
