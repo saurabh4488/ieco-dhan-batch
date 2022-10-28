@@ -5,7 +5,6 @@ import com.cherry.iecodhanbatch.models.SecurityIdRequest;
 import com.cherry.iecodhanbatch.repository.ScriptMasterRepository;
 import com.cherry.iecodhanbatch.services.ScriptMasterService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 @Service
 @Slf4j
@@ -55,14 +55,26 @@ public class ScriptMasterServiceImpl implements ScriptMasterService {
     }
 
     @Override
-    public String getSecurityId(SecurityIdRequest securityIdRequest) {
+    public HashMap<String, Object> getSecurityId(SecurityIdRequest securityIdRequest) {
+        HashMap<String,Object> response=new HashMap<>();
         log.info("hitting setting security");
         String exchangeSymbol=securityIdRequest.getSemExmExchangeId();
         log.info(exchangeSymbol);
         String tradingSymbol=securityIdRequest.getSemTradingSymbol();
         log.info(tradingSymbol);
-        ScriptMasterDb securityId=scriptMasterRepository.findSecurityId(exchangeSymbol,tradingSymbol);
-        log.info(securityId.getSem_smst_security_id());
-        return securityId.getSem_smst_security_id();
+        String instrumentName=securityIdRequest.getSemInstrumentName();
+        try {
+            ScriptMasterDb securityId = scriptMasterRepository.findSecurityId(exchangeSymbol, tradingSymbol, instrumentName);
+            log.info(securityId.getSem_smst_security_id());
+            response.put("message","success");
+            response.put("securityId",securityId.getSem_smst_security_id());
+            return response;
+        }
+        catch (Exception e){
+            response.put("message","failure");
+            response.put("securityId","No Security Id present with given data");
+            return response ;
+        }
+
     }
 }

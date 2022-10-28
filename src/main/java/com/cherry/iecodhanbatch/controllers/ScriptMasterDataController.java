@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 @RestController
 public class ScriptMasterDataController {
@@ -22,7 +23,7 @@ public class ScriptMasterDataController {
     }
 
     @PostMapping("/getsecid")
-    public String getSecurityId(@RequestBody SecurityIdRequest securityIdRequest){
+    public HashMap<String, Object> getSecurityId(@RequestBody SecurityIdRequest securityIdRequest){
         return scriptMasterService.getSecurityId(securityIdRequest);
     }
 }
