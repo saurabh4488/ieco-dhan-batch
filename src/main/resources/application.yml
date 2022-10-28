@@ -1,0 +1,25 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  application:
+    name: ieco-internal-ocr
+  datasource:
+    hikari:
+      connection-timeout: '30000'
+      maximum-pool-size: '50'
+    password: saurabh4488
+    username: system
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+  jpa:
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    view:
+      suffix: .html
+server:
+  port: '8688'
