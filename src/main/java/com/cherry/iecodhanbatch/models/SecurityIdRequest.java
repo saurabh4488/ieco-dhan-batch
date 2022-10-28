@@ -17,4 +17,5 @@ import javax.persistence.Entity;
 public class SecurityIdRequest {
     private String semExmExchangeId;
     private String semTradingSymbol;
+    private String semInstrumentName;
 }

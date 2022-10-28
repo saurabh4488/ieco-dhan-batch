@@ -4,6 +4,7 @@ import com.cherry.iecodhanbatch.models.ScriptMasterDb;
 import com.cherry.iecodhanbatch.models.SecurityIdRequest;
 import com.cherry.iecodhanbatch.repository.ScriptMasterRepository;
 import com.cherry.iecodhanbatch.services.ScriptMasterService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
@@ -15,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-
+@Slf4j
 @Service
 public class ScriptMasterServiceImpl implements ScriptMasterService {
 
@@ -61,7 +62,8 @@ public class ScriptMasterServiceImpl implements ScriptMasterService {
         log.info(exchangeSymbol);
         String tradingSymbol=securityIdRequest.getSemTradingSymbol();
         log.info(tradingSymbol);
-        ScriptMasterDb securityId=scriptMasterRepository.findSecurityId(exchangeSymbol,tradingSymbol);
+        String instrumentName=securityIdRequest.getSemInstrumentName();
+        ScriptMasterDb securityId=scriptMasterRepository.findSecurityId(exchangeSymbol,tradingSymbol,instrumentName);
         log.info(securityId.getSem_smst_security_id());
         return securityId.getSem_smst_security_id();
     }

@@ -21,7 +21,7 @@ public class ScriptMasterDataController {
         return "Data Fetched from file successfully";
     }
 
-    @PostMapping("/getsecid")
+    @PostMapping("/getsecurityid")
     public String getSecurityId(@RequestBody SecurityIdRequest securityIdRequest){
         return scriptMasterService.getSecurityId(securityIdRequest);
     }

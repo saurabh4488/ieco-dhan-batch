@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface ScriptMasterRepository extends CrudRepository<ScriptMasterDb,Integer> {
 
-    @Query(value = "SELECT u FROM ScriptMasterDb u where u.sem_exm_exch_id=:semExmExchangeId and u.sem_trading_symbol=:semTradingSymbol")
-    ScriptMasterDb findSecurityId(@Param("semExmExchangeId") String semExmExchangeId, @Param("semTradingSymbol") String semTradingSymbol);
+    @Query(value = "SELECT u FROM ScriptMasterDb u where u.sem_exm_exch_id=:semExmExchangeId and u.sem_trading_symbol=:semTradingSymbol and u.sem_instrument_name=:instrumentName")
+    ScriptMasterDb findSecurityId(@Param("semExmExchangeId") String semExmExchangeId, @Param("semTradingSymbol") String semTradingSymbol, @Param("instrumentName") String instrumentName);
 }
