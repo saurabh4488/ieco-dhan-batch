@@ -11,4 +11,6 @@ public interface ScriptMasterService {
     void addMasterData(MultipartFile file) throws IOException;
 
     String getSecurityId(SecurityIdRequest securityIdRequest);
+
+    String getBackUpTable();
 }

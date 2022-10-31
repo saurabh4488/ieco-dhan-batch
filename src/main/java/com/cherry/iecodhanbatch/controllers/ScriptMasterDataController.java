@@ -25,4 +25,9 @@ public class ScriptMasterDataController {
     public String getSecurityId(@RequestBody SecurityIdRequest securityIdRequest){
         return scriptMasterService.getSecurityId(securityIdRequest);
     }
+
+    @GetMapping("/getsecurityid")
+    public String getBackUp(){
+        return scriptMasterService.getBackUpTable();
+    }
 }
