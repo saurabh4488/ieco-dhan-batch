@@ -1,7 +1,7 @@
 package com.cherry.iecodhanbatch.services.impl;
 
 import com.cherry.iecodhanbatch.models.ScriptMasterDb;
-import com.cherry.iecodhanbatch.models.SecurityIdRequest;
+import com.cherry.iecodhanbatch.domain.SecurityIdRequest;
 import com.cherry.iecodhanbatch.repository.ScriptMasterRepository;
 import com.cherry.iecodhanbatch.services.ScriptMasterService;
 import lombok.extern.slf4j.Slf4j;

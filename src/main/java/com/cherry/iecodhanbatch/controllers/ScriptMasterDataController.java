@@ -1,6 +1,6 @@
 package com.cherry.iecodhanbatch.controllers;
 
-import com.cherry.iecodhanbatch.models.SecurityIdRequest;
+import com.cherry.iecodhanbatch.domain.SecurityIdRequest;
 import com.cherry.iecodhanbatch.services.ScriptMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
