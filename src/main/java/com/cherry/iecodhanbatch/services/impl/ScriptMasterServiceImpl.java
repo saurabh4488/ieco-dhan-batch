@@ -1,7 +1,9 @@
 package com.cherry.iecodhanbatch.services.impl;
 
+import com.cherry.iecodhanbatch.models.BackUpDb;
 import com.cherry.iecodhanbatch.models.ScriptMasterDb;
 import com.cherry.iecodhanbatch.models.SecurityIdRequest;
+import com.cherry.iecodhanbatch.repository.BackUpTableRepository;
 import com.cherry.iecodhanbatch.repository.ScriptMasterRepository;
 import com.cherry.iecodhanbatch.services.ScriptMasterService;
 import com.opencsv.CSVReader;
@@ -26,6 +28,9 @@ public class ScriptMasterServiceImpl implements ScriptMasterService {
     @Autowired
     private ScriptMasterRepository scriptMasterRepository;
 
+    @Autowired
+    private BackUpTableRepository backUpTableRepository;
+
     @Override
     public void addMasterData(MultipartFile file) throws IOException {
 
@@ -40,6 +45,28 @@ public class ScriptMasterServiceImpl implements ScriptMasterService {
                 .withIgnoreQuotations(true)
                 .withThrowExceptions(false) //1
                 .build().parse();
+
+        List<BackUpDb> backUpDbs =new CsvToBeanBuilder(new FileReader(convFile)).withType(BackUpDb.class)
+                .withIgnoreQuotations(true)
+                .withThrowExceptions(false) //1
+                .build().parse();
+
+        BackUpDb backUpDb=new BackUpDb();
+
+        for(BackUpDb back: backUpDbs){
+            if (back.getSem_instrument_name().equals("EQUITY")){
+                backUpDb.setSem_exm_exch_id(back.getSem_exm_exch_id());
+                backUpDb.setSem_segment(back.getSem_segment());
+                scriptMasterDb.setSem_smst_security_id(script.getSem_smst_security_id());
+                scriptMasterDb.setSem_instrument_name(script.getSem_instrument_name());
+                scriptMasterDb.setSem_expiry_code(script.getSem_expiry_code());
+                scriptMasterDb.setSem_trading_symbol(script.getSem_trading_symbol());
+                scriptMasterDb.setSem_lot_units(script.getSem_lot_units());
+                scriptMasterDb.setSem_custom_symbol(script.getSem_custom_symbol());
+                scriptMasterDb.setSymbol(script.getSymbol());
+                scriptMasterRepository.save(scriptMasterDb);
+            }
+        }
 
         ScriptMasterDb scriptMasterDb=new ScriptMasterDb();
 
@@ -100,9 +127,4 @@ public class ScriptMasterServiceImpl implements ScriptMasterService {
         return securityId.getSem_smst_security_id();
     }
 
-    @Override
-    public String getBackUpTable() {
-
-        return "BackUpTable ready";
-    }
 }

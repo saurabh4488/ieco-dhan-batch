@@ -12,5 +12,4 @@ public interface ScriptMasterService {
 
     String getSecurityId(SecurityIdRequest securityIdRequest);
 
-    String getBackUpTable();
 }
