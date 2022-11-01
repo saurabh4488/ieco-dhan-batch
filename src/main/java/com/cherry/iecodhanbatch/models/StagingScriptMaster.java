@@ -3,7 +3,6 @@ package com.cherry.iecodhanbatch.models;
 import com.opencsv.bean.CsvBindByName;
 import lombok.*;
 import javax.persistence.*;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,8 +10,13 @@ import java.util.Date;
 @Setter
 @Builder
 @Entity
-@Table(name = "SCRIPT_MASTER")
-public class ScriptMasterDb {
+@Table(name = "StagingScriptMaster")
+public class StagingScriptMaster {
+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator")
+//    @Column(name = "id")
+//    private Integer id;
 
     @CsvBindByName(column = "SEM_EXM_EXCH_ID")
     @Column(name = "SEM_EXM_EXCH_ID")

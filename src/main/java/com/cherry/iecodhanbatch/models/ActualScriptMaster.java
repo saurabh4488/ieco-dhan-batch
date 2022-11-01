@@ -3,7 +3,6 @@ package com.cherry.iecodhanbatch.models;
 import com.opencsv.bean.CsvBindByName;
 import lombok.*;
 import javax.persistence.*;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,13 +10,8 @@ import java.util.Date;
 @Setter
 @Builder
 @Entity
-@Table(name = "BACKUP_TABLE")
-public class BackUpDb {
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator")
-//    @Column(name = "id")
-//    private Integer id;
+@Table(name = "ACTUAL_SCRIPT_MASTER")
+public class ActualScriptMaster {
 
     @CsvBindByName(column = "SEM_EXM_EXCH_ID")
     @Column(name = "SEM_EXM_EXCH_ID")
