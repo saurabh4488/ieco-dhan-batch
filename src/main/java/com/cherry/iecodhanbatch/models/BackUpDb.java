@@ -52,8 +52,5 @@ public class BackUpDb {
     @Column(name = "SEM_CUSTOM_SYMBOL")
     private String sem_custom_symbol;
 
-    @CsvBindByName(column = "SYMBOL")
-    @Column(name = "SYMBOL")
-    private String symbol;
 
 }

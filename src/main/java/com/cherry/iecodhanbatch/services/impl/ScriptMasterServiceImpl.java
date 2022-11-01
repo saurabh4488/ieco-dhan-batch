@@ -47,29 +47,28 @@ public class ScriptMasterServiceImpl implements ScriptMasterService {
                 .withThrowExceptions(false) //1
                 .build().parse();
 
-//        List<BackUpDb> backUpDbs =new CsvToBeanBuilder(new FileReader(convFile)).withType(BackUpDb.class)
-//                .withIgnoreQuotations(true)
-//                .withThrowExceptions(false)
-//                .build().parse();
-//
-//        BackUpDb backUpDb=new BackUpDb();
-//
-//        for(BackUpDb back: backUpDbs){
-//            if (back.getSem_instrument_name().equals("EQUITY")){
-//                backUpDb.setSem_exm_exch_id(back.getSem_exm_exch_id());
-//                backUpDb.setSem_segment(back.getSem_segment());
-//                backUpDb.setSem_smst_security_id(back.getSem_smst_security_id());
-//                backUpDb.setSem_instrument_name(back.getSem_instrument_name());
-//                backUpDb.setSem_expiry_code(back.getSem_expiry_code());
-//                backUpDb.setSem_trading_symbol(back.getSem_trading_symbol());
-//                backUpDb.setSem_lot_units(back.getSem_lot_units());
-//                backUpDb.setSem_custom_symbol(back.getSem_custom_symbol());
-//                backUpDb.setSymbol(back.getSymbol());
-//
-//                backUpTableRepository.save(backUpDb);
-//            }
-//        }
-//
+        List<BackUpDb> backUpDbs =new CsvToBeanBuilder(new FileReader(convFile)).withType(BackUpDb.class)
+                .withIgnoreQuotations(true)
+                .withThrowExceptions(false)
+                .build().parse();
+
+        BackUpDb backUpDb=new BackUpDb();
+
+        for(BackUpDb back: backUpDbs){
+            if (back.getSem_instrument_name().equals("EQUITY")){
+                backUpDb.setSem_exm_exch_id(back.getSem_exm_exch_id());
+                backUpDb.setSem_segment(back.getSem_segment());
+                backUpDb.setSem_smst_security_id(back.getSem_smst_security_id());
+                backUpDb.setSem_instrument_name(back.getSem_instrument_name());
+                backUpDb.setSem_expiry_code(back.getSem_expiry_code());
+                backUpDb.setSem_trading_symbol(back.getSem_trading_symbol());
+                backUpDb.setSem_lot_units(back.getSem_lot_units());
+                backUpDb.setSem_custom_symbol(back.getSem_custom_symbol());
+
+                backUpTableRepository.save(backUpDb);
+            }
+        }
+
 //        scriptMasterRepository.deleteTable();
 
         ScriptMasterDb scriptMasterDb=new ScriptMasterDb();
@@ -84,7 +83,6 @@ public class ScriptMasterServiceImpl implements ScriptMasterService {
                 scriptMasterDb.setSem_trading_symbol(script.getSem_trading_symbol());
                 scriptMasterDb.setSem_lot_units(script.getSem_lot_units());
                 scriptMasterDb.setSem_custom_symbol(script.getSem_custom_symbol());
-                scriptMasterDb.setSymbol(script.getSymbol());
                 scriptMasterRepository.save(scriptMasterDb);
             }
         }
